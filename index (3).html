@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>FLAMELY | Про Лига</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --flame:#ff4500;--flame2:#ff7a00;
+  --prime:#8b5cf6;--prime2:#a78bfa;
+  --green:#10b981;
+  --dark:#07070a;--card:#0e0e12;--card2:#141418;
+  --border:rgba(255,255,255,0.07);
+  --border-flame:rgba(255,69,0,0.35);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--dark);color:#e5e7eb;font-family:'Space Grotesk',sans-serif;overflow-x:hidden;min-height:100vh;}
+.font-display{font-family:'Bebas Neue',sans-serif;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 60% 40% at 15% 10%,rgba(255,69,0,0.09) 0%,transparent 60%),radial-gradient(ellipse 50% 50% at 85% 85%,rgba(139,92,246,0.07) 0%,transparent 55%);pointer-events:none;z-index:0;}
+body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,0.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.015) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:18px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.03) 0%,transparent 50%);pointer-events:none;}
+.card-flame{border-color:var(--border-flame);}
+.card-prime{border-color:rgba(139,92,246,0.35);background:linear-gradient(135deg,#0e0e12,#0f0c1a);}
+.btn-flame{background:linear-gradient(135deg,#ff4500,#ff7a00);border:none;color:#fff;font-family:'Bebas Neue',sans-serif;letter-spacing:2px;cursor:pointer;transition:all 0.2s;box-shadow:0 0 30px rgba(255,69,0,0.35),inset 0 1px 0 rgba(255,255,255,0.15);}
+.btn-flame:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(255,69,0,0.55);}
+.btn-flame:active{transform:scale(0.97);}
+.btn-ghost{background:rgba(255,255,255,0.05);border:1px solid var(--border);color:#9ca3af;cursor:pointer;transition:all 0.2s;}
+.btn-ghost:hover{background:rgba(255,255,255,0.09);color:#e5e7eb;}
+.btn-tg{background:linear-gradient(135deg,#0088cc,#00b4d8);border:none;color:#fff;cursor:pointer;transition:all 0.2s;box-shadow:0 0 20px rgba(0,136,204,0.35);}
+.btn-tg:hover{transform:translateY(-1px);box-shadow:0 6px 30px rgba(0,136,204,0.6);}
+.btn-red{background:linear-gradient(135deg,#dc2626,#ef4444);border:none;color:#fff;font-family:'Bebas Neue',sans-serif;letter-spacing:2px;cursor:pointer;transition:all 0.2s;}
+.btn-red:hover{transform:translateY(-1px);}
+.btn-prime{background:linear-gradient(135deg,#7c3aed,#a78bfa);border:none;color:#fff;font-family:'Bebas Neue',sans-serif;letter-spacing:2px;cursor:pointer;transition:all 0.2s;box-shadow:0 0 20px rgba(139,92,246,0.35);}
+.btn-prime:hover{transform:translateY(-1px);box-shadow:0 6px 30px rgba(139,92,246,0.6);}
+.nav-bar{height:60px;background:rgba(7,7,10,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 20px;position:sticky;top:0;z-index:50;}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;color:#fff;line-height:1;cursor:pointer;user-select:none;-webkit-user-select:none;}
+.logo span{color:var(--flame);}
+.tab-bar{background:rgba(7,7,10,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;gap:2px;padding:10px 12px;overflow-x:auto;position:sticky;top:60px;z-index:40;}
+.tab-bar::-webkit-scrollbar{display:none;}
+.tab-btn{padding:7px 14px;border-radius:10px;font-size:11px;font-weight:600;color:#4b5563;cursor:pointer;white-space:nowrap;transition:all 0.2s;background:transparent;border:none;}
+.tab-btn.active{background:rgba(255,69,0,0.15);color:var(--flame);border:1px solid rgba(255,69,0,0.25);}
+.tab-btn:hover:not(.active){color:#9ca3af;background:rgba(255,255,255,0.04);}
+.badge-prime{background:linear-gradient(135deg,#7c3aed,#a78bfa);color:#fff;font-size:9px;padding:2px 8px;border-radius:20px;font-weight:700;letter-spacing:1px;}
+.badge-free{background:rgba(255,255,255,0.07);border:1px solid var(--border);color:#6b7280;font-size:9px;padding:2px 8px;border-radius:20px;font-weight:700;}
+.dot-online{width:8px;height:8px;border-radius:50%;background:#10b981;box-shadow:0 0 8px rgba(16,185,129,0.8);display:inline-block;flex-shrink:0;}
+.dot-ingame{width:8px;height:8px;border-radius:50%;background:var(--flame);box-shadow:0 0 8px rgba(255,69,0,0.8);display:inline-block;flex-shrink:0;}
+.dot-offline{width:8px;height:8px;border-radius:50%;background:#374151;display:inline-block;flex-shrink:0;}
+.section-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#4b5563;}
+.stat-card{background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:14px 10px;text-align:center;}
+.stat-value{font-family:'Bebas Neue',sans-serif;font-size:26px;line-height:1;}
+.stat-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#4b5563;margin-top:4px;}
+.input-field{width:100%;background:rgba(0,0,0,0.5);border:1px solid var(--border);border-radius:12px;padding:12px 16px;color:#e5e7eb;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;outline:none;transition:border-color 0.2s;}
+.input-field:focus{border-color:var(--flame);}
+.input-field::placeholder{color:#374151;}
+.lobby-row{background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;transition:border-color 0.2s;}
+.lobby-row:hover{border-color:rgba(255,69,0,0.25);}
+.result-win{border-left:3px solid var(--green);}
+.result-loss{border-left:3px solid #ef4444;}
+#toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(10px);background:#1a1a1f;border:1px solid rgba(255,69,0,0.4);color:#fff;padding:10px 22px;border-radius:100px;font-size:12px;font-weight:600;z-index:9999;opacity:0;transition:opacity 0.25s,transform 0.25s;pointer-events:none;white-space:nowrap;}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.93);backdrop-filter:blur(16px);z-index:9000;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;}
+.modal-bg.open{display:flex;}
+@keyframes modalIn{from{opacity:0;transform:scale(0.92)}to{opacity:1;transform:scale(1)}}
+.modal-inner{animation:modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1) forwards;width:100%;max-width:360px;margin:auto;}
+.avatar-xl{width:72px;height:72px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:30px;border:2px solid var(--border-flame);overflow:hidden;flex-shrink:0;}
+.nav-avatar{width:36px;height:36px;border-radius:10px;background:var(--card2);border:1.5px solid rgba(255,69,0,0.4);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:18px;cursor:pointer;overflow:hidden;}
+
+/* CHAT */
+.chat-wrap{display:flex;flex-direction:column;height:320px;background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+.chat-messages{flex:1;overflow-y:auto;padding:10px 12px;display:flex;flex-direction:column;gap:6px;}
+.chat-msg{font-size:11px;line-height:1.5;}
+.chat-msg .sender{font-weight:700;color:var(--flame);}
+.chat-msg .sender.me{color:var(--prime2);}
+.chat-msg .sender.support{color:#10b981;}
+.chat-msg .text{color:#9ca3af;}
+.chat-msg .ts{color:#374151;font-size:9px;margin-left:4px;}
+.chat-input-wrap{display:flex;border-top:1px solid var(--border);}
+.chat-input{flex:1;background:transparent;border:none;outline:none;padding:10px 12px;color:#e5e7eb;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:500;}
+.chat-input::placeholder{color:#374151;}
+.chat-send-btn{padding:8px 14px;background:rgba(255,69,0,0.12);border:none;color:var(--flame);cursor:pointer;font-size:14px;transition:background 0.2s;}
+.chat-send-btn:hover{background:rgba(255,69,0,0.22);}
+
+/* PUSH NOTIF */
+#push-notif{position:fixed;top:72px;right:16px;z-index:9500;display:flex;flex-direction:column;gap:8px;pointer-events:none;}
+.push-item{background:#0e0e12;border:1px solid rgba(255,69,0,0.4);border-radius:14px;padding:12px 16px;min-width:260px;max-width:300px;display:flex;gap:10px;align-items:flex-start;pointer-events:all;cursor:pointer;transition:transform 0.2s;}
+.push-item:hover{transform:scale(1.02);}
+@keyframes pushIn{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes pushOut{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(40px)}}
+.push-item{animation:pushIn 0.3s ease forwards;}
+.push-item.out{animation:pushOut 0.3s ease forwards;}
+
+/* ADMIN */
+.admin-badge{background:linear-gradient(135deg,#dc2626,#f97316);color:#fff;font-size:9px;padding:2px 8px;border-radius:20px;font-weight:700;letter-spacing:1px;}
+
+/* FRIEND REQUEST */
+.friend-req-badge{position:absolute;top:-4px;right:-4px;width:16px;height:16px;background:#ef4444;border-radius:50%;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid var(--dark);}
+
+/* NOTIFICATION DOT */
+.tab-notif{position:relative;}
+.tab-notif-dot{position:absolute;top:-2px;right:-6px;width:7px;height:7px;background:#ef4444;border-radius:50%;border:1.5px solid var(--dark);}
+
+/* REPORT STATUS */
+.report-open{color:#f59e0b;font-size:9px;font-weight:700;}
+.report-closed{color:#10b981;font-size:9px;font-weight:700;}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-thumb{background:rgba(255,69,0,0.4);border-radius:2px;}
+
+/* FRIEND CHAT BUBBLES */
+.bubble-me{background:rgba(255,69,0,0.15);border:1px solid rgba(255,69,0,0.25);border-radius:12px 12px 4px 12px;padding:8px 12px;align-self:flex-end;max-width:80%;}
+.bubble-them{background:var(--card2);border:1px solid var(--border);border-radius:12px 12px 12px 4px;padding:8px 12px;align-self:flex-start;max-width:80%;}
+.bubble-text{font-size:12px;color:#e5e7eb;}
+.bubble-time{font-size:9px;color:#4b5563;margin-top:3px;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.page{animation:fadeUp 0.35s ease forwards;}
+
+/* LOGO LONG PRESS */
+@keyframes logoGlow{0%,100%{text-shadow:none}50%{text-shadow:0 0 20px #ff4500,0 0 40px #ff4500}}
+.logo-glowing{animation:logoGlow 0.5s ease infinite;}
+
+/* FIX: confirm dialog replacement */
+.confirm-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px;}
+.confirm-box{background:#141418;border:1px solid rgba(239,68,68,0.4);border-radius:18px;padding:24px;max-width:320px;width:100%;text-align:center;}
+</style>
+</head>
+<body>
+
+<div id="toast"></div>
+<div id="push-notif"></div>
+
+<!-- NAV -->
+<div class="nav-bar">
+  <div class="logo" id="logo-btn">FLAME<span>LY</span></div>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <div id="notif-bell" onclick="openTab('friends')" style="position:relative;cursor:pointer;font-size:18px;color:#4b5563;">🔔<span id="notif-count" style="display:none;position:absolute;top:-4px;right:-4px;width:16px;height:16px;background:#ef4444;border-radius:50%;font-size:9px;font-weight:700;align-items:center;justify-content:center;border:2px solid var(--dark);"></span></div>
+    <div class="nav-avatar" id="nav-av" onclick="openTab('profile')">🔥</div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="openTab('home')" id="tab-home">🏠 ГЛАВНАЯ</button>
+  <button class="tab-btn tab-notif" onclick="openTab('friends')" id="tab-friends">👥 ДРУЗЬЯ<span class="tab-notif-dot" id="friends-dot" style="display:none;"></span></button>
+  <button class="tab-btn" onclick="openTab('lobby')" id="tab-lobby">⚔️ ЛОББИ</button>
+  <button class="tab-btn" onclick="openTab('elo')" id="tab-elo">📊 ELO</button>
+  <button class="tab-btn" onclick="openTab('support')" id="tab-support">💬 ПОДДЕРЖКА</button>
+  <button class="tab-btn" onclick="openTab('profile')" id="tab-profile">👤 ПРОФИЛЬ</button>
+</div>
+
+<!-- MAIN CONTENT -->
+<div id="app-content" style="position:relative;z-index:1;padding:16px;max-width:480px;margin:0 auto;padding-bottom:40px;"></div>
+
+<!-- MODAL: REPORT -->
+<div id="report-modal" class="modal-bg">
+  <div class="modal-inner">
+    <div class="card card-flame" style="padding:24px 20px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+        <div class="font-display" style="font-size:28px;letter-spacing:2px;">⚠️ РЕПОРТ</div>
+        <button onclick="closeModal('report-modal')" class="btn-ghost" style="border-radius:10px;padding:6px 12px;font-size:12px;">✕</button>
+      </div>
+      <div id="report-target-info" style="margin-bottom:16px;"></div>
+      <div style="margin-bottom:12px;">
+        <div class="section-label" style="margin-bottom:8px;">ПРИЧИНА</div>
+        <div style="display:flex;flex-direction:column;gap:8px;" id="report-reasons">
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:var(--card2);">
+            <input type="radio" name="report-reason" value="Читерство/Хаки" style="accent-color:var(--flame);"> <span style="font-size:12px;font-weight:600;">🎯 Читерство / Хаки</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:var(--card2);">
+            <input type="radio" name="report-reason" value="Токсичное поведение"> <span style="font-size:12px;font-weight:600;">🤬 Токсичное поведение</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:var(--card2);">
+            <input type="radio" name="report-reason" value="Намеренный слив"> <span style="font-size:12px;font-weight:600;">💀 Намеренный слив</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:var(--card2);">
+            <input type="radio" name="report-reason" value="AFK / Не играет"> <span style="font-size:12px;font-weight:600;">😴 AFK / Не играет</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:var(--card2);">
+            <input type="radio" name="report-reason" value="Другое"> <span style="font-size:12px;font-weight:600;">📝 Другое</span>
+          </label>
+        </div>
+      </div>
+      <div style="margin-bottom:16px;">
+        <div class="section-label" style="margin-bottom:8px;">КОММЕНТАРИЙ</div>
+        <textarea id="report-comment" class="input-field" placeholder="Опишите ситуацию..." rows="3" style="resize:none;"></textarea>
+      </div>
+      <button onclick="submitReport()" class="btn-red font-display" style="width:100%;padding:14px;border-radius:14px;font-size:18px;">ОТПРАВИТЬ РЕПОРТ</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: FRIEND CHAT -->
+<div id="friend-chat-modal" class="modal-bg">
+  <div class="modal-inner">
+    <div class="card card-flame" style="padding:20px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+        <div id="fc-avatar" class="avatar-xl" style="font-size:24px;width:44px;height:44px;border-radius:12px;"></div>
+        <div style="flex:1;">
+          <div id="fc-name" style="font-weight:700;font-size:14px;"></div>
+          <div id="fc-status" style="font-size:11px;color:#4b5563;"></div>
+        </div>
+        <button onclick="closeModal('friend-chat-modal');clearInterval(window._chatPoll);" class="btn-ghost" style="border-radius:10px;padding:6px 12px;font-size:12px;">✕</button>
+      </div>
+      <div class="chat-wrap" style="height:280px;">
+        <div class="chat-messages" id="fc-messages" style="display:flex;flex-direction:column;gap:8px;"></div>
+        <div class="chat-input-wrap">
+          <input class="chat-input" id="fc-input" placeholder="Сообщение..." onkeydown="if(event.key==='Enter')sendFriendMsg()">
+          <button class="chat-send-btn" onclick="sendFriendMsg()">➤</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: ADD FRIEND -->
+<div id="add-friend-modal" class="modal-bg">
+  <div class="modal-inner">
+    <div class="card card-flame" style="padding:24px 20px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+        <div class="font-display" style="font-size:28px;letter-spacing:2px;">👥 ДОБАВИТЬ ДРУГА</div>
+        <button onclick="closeModal('add-friend-modal')" class="btn-ghost" style="border-radius:10px;padding:6px 12px;font-size:12px;">✕</button>
+      </div>
+      <input class="input-field" id="friend-search-input" placeholder="Введите никнейм или ID..." style="margin-bottom:12px;" oninput="searchFriends()">
+      <div id="friend-search-results" style="display:flex;flex-direction:column;gap:8px;min-height:40px;">
+        <div style="text-align:center;color:#4b5563;font-size:12px;padding:20px;">Начните вводить ник для поиска</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: ADMIN PANEL — ИСПРАВЛЕН -->
+<div id="admin-modal" class="modal-bg">
+  <div class="modal-inner" style="max-width:420px;">
+    <div class="card" style="padding:0;border-color:rgba(220,38,38,0.5);overflow:hidden;">
+
+      <!-- Header -->
+      <div style="background:linear-gradient(135deg,rgba(220,38,38,0.18),rgba(249,115,22,0.12));padding:20px 20px 16px;border-bottom:1px solid rgba(220,38,38,0.2);">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="width:36px;height:36px;background:linear-gradient(135deg,#dc2626,#f97316);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;">⚙️</div>
+            <div>
+              <div class="font-display" style="font-size:26px;letter-spacing:2px;color:#ef4444;line-height:1;">ADMIN PANEL</div>
+              <div style="font-size:9px;color:#4b5563;font-weight:700;letter-spacing:2px;">FLAMELY SYSTEM v3.1</div>
+            </div>
+          </div>
+          <button onclick="closeModal('admin-modal')" class="btn-ghost" style="border-radius:10px;padding:6px 12px;font-size:12px;">✕</button>
+        </div>
+      </div>
+
+      <!-- Tab nav inside admin -->
+      <div style="display:flex;gap:2px;padding:10px 12px;border-bottom:1px solid var(--border);background:rgba(0,0,0,0.2);overflow-x:auto;">
+        <button onclick="switchAdminTab('tools')" id="admin-tab-tools" style="padding:6px 12px;border-radius:8px;font-size:10px;font-weight:700;letter-spacing:1px;cursor:pointer;white-space:nowrap;transition:all 0.2s;background:rgba(220,38,38,0.15);color:#ef4444;border:1px solid rgba(220,38,38,0.25);">🛠 ИНСТРУМЕНТЫ</button>
+        <button onclick="switchAdminTab('reports')" id="admin-tab-reports" style="padding:6px 12px;border-radius:8px;font-size:10px;font-weight:700;letter-spacing:1px;cursor:pointer;white-space:nowrap;transition:all 0.2s;background:transparent;color:#4b5563;border:none;">📋 РЕПОРТЫ</button>
+        <button onclick="switchAdminTab('tickets')" id="admin-tab-tickets" style="padding:6px 12px;border-radius:8px;font-size:10px;font-weight:700;letter-spacing:1px;cursor:pointer;white-space:nowrap;transition:all 0.2s;background:transparent;color:#4b5563;border:none;">🎫 ТИКЕТЫ</button>
+      </div>
+
+      <!-- TOOLS TAB — ИСПРАВЛЕН display:block вместо flex -->
+      <div id="admin-section-tools" style="padding:16px;display:block;">
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <!-- Give ELO -->
+          <div style="background:rgba(255,69,0,0.08);border:1px solid rgba(255,69,0,0.2);border-radius:14px;padding:14px;">
+            <div class="section-label" style="margin-bottom:10px;color:var(--flame);">⚡ ВЫДАТЬ ELO ПО ID</div>
+            <div style="display:flex;gap:8px;margin-bottom:8px;">
+              <input class="input-field" id="elo-id-input" placeholder="ID (напр. #F001)" style="flex:1;">
+              <input class="input-field" id="elo-amount-input" type="number" placeholder="±ELO" style="width:90px;">
+            </div>
+            <div style="display:flex;gap:6px;">
+              <button onclick="adminGiveEloById()" class="btn-flame font-display" style="flex:1;padding:9px;border-radius:10px;font-size:14px;">ВЫДАТЬ</button>
+              <button onclick="adminTakeEloById()" class="btn-red font-display" style="flex:1;padding:9px;border-radius:10px;font-size:14px;">ЗАБРАТЬ</button>
+            </div>
+          </div>
+          <!-- Give Prime -->
+          <div style="background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.25);border-radius:14px;padding:14px;">
+            <div class="section-label" style="margin-bottom:10px;color:var(--prime2);">💎 PRIME ПО ID</div>
+            <input class="input-field" id="prime-id-input" placeholder="ID пользователя..." style="margin-bottom:8px;">
+            <div style="display:flex;gap:8px;">
+              <select id="prime-duration" class="input-field" style="flex:1;padding:9px 12px;">
+                <option value="30">30 дней</option>
+                <option value="90">90 дней</option>
+                <option value="365">1 год</option>
+                <option value="9999">Навсегда</option>
+              </select>
+              <button onclick="adminGivePrime()" class="btn-prime font-display" style="padding:9px 18px;border-radius:10px;font-size:14px;">ВЫДАТЬ</button>
+            </div>
+          </div>
+          <!-- Verify -->
+          <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.25);border-radius:14px;padding:14px;">
+            <div class="section-label" style="margin-bottom:10px;color:#10b981;">✅ ВЕРИФИКАЦИЯ ПО ID</div>
+            <input class="input-field" id="verify-id-input" placeholder="ID пользователя..." style="margin-bottom:8px;">
+            <div style="display:flex;gap:8px;">
+              <button onclick="adminVerify()" style="flex:1;padding:9px;border-radius:10px;font-size:14px;font-family:'Bebas Neue',sans-serif;letter-spacing:1px;background:rgba(16,185,129,0.2);border:1px solid rgba(16,185,129,0.4);color:#10b981;cursor:pointer;">✅ ВЫДАТЬ ГАЛКУ</button>
+              <button onclick="adminUnverify()" style="flex:1;padding:9px;border-radius:10px;font-size:14px;font-family:'Bebas Neue',sans-serif;letter-spacing:1px;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:#6b7280;cursor:pointer;">✕ СНЯТЬ</button>
+            </div>
+          </div>
+          <!-- Ban / Unban -->
+          <div style="background:rgba(220,38,38,0.08);border:1px solid rgba(220,38,38,0.25);border-radius:14px;padding:14px;">
+            <div class="section-label" style="margin-bottom:10px;color:#ef4444;">🔨 БАН / РАЗБАН</div>
+            <input class="input-field" id="ban-id-input" placeholder="ID пользователя..." style="margin-bottom:8px;">
+            <textarea class="input-field" id="ban-reason-input" placeholder="Причина бана (необязательно)..." rows="2" style="resize:none;margin-bottom:8px;"></textarea>
+            <div style="display:flex;gap:8px;">
+              <button onclick="adminBan()" class="btn-red font-display" style="flex:1;padding:9px;border-radius:10px;font-size:14px;">🔨 БАН</button>
+              <button onclick="adminUnban()" class="btn-ghost font-display" style="flex:1;padding:9px;border-radius:10px;font-size:14px;color:#10b981;border-color:rgba(16,185,129,0.3);">✓ РАЗБАН</button>
+            </div>
+          </div>
+          <!-- Banned list -->
+          <div id="banned-list-wrap" style="display:none;background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:14px;padding:12px;">
+            <div class="section-label" style="margin-bottom:8px;color:#ef4444;">СПИСОК ЗАБЛОКИРОВАННЫХ</div>
+            <div id="banned-list" style="display:flex;flex-direction:column;gap:6px;max-height:140px;overflow-y:auto;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REPORTS TAB -->
+      <div id="admin-section-reports" style="padding:16px;display:none;flex-direction:column;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <div class="section-label" style="color:#f59e0b;">ЖАЛОБЫ ПОЛЬЗОВАТЕЛЕЙ</div>
+          <div id="admin-reports-count" style="font-size:10px;font-weight:700;color:#f59e0b;"></div>
+        </div>
+        <div id="admin-reports-list" style="display:flex;flex-direction:column;gap:8px;max-height:400px;overflow-y:auto;"></div>
+      </div>
+
+      <!-- TICKETS TAB -->
+      <div id="admin-section-tickets" style="padding:16px;display:none;flex-direction:column;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <div class="section-label" style="color:#10b981;">ОБРАЩЕНИЯ В ПОДДЕРЖКУ</div>
+          <div id="admin-tickets-count" style="font-size:10px;font-weight:700;color:#10b981;"></div>
+        </div>
+        <div id="admin-tickets-list" style="display:flex;flex-direction:column;gap:8px;max-height:400px;overflow-y:auto;"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: SUPPORT TICKET -->
+<div id="ticket-modal" class="modal-bg">
+  <div class="modal-inner">
+    <div class="card" style="padding:20px;border-color:rgba(16,185,129,0.3);">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+        <div id="ticket-modal-title" class="font-display" style="font-size:24px;letter-spacing:2px;color:#10b981;"></div>
+        <button onclick="closeModal('ticket-modal')" class="btn-ghost" style="border-radius:10px;padding:6px 12px;font-size:12px;">✕</button>
+      </div>
+      <div class="chat-wrap" style="height:300px;">
+        <div class="chat-messages" id="ticket-messages"></div>
+        <div class="chat-input-wrap">
+          <input class="chat-input" id="ticket-input" placeholder="Напишите сообщение поддержке..." onkeydown="if(event.key==='Enter')sendTicketMsg()">
+          <button class="chat-send-btn" onclick="sendTicketMsg()">➤</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CUSTOM CONFIRM DIALOG — замена window.confirm -->
+<div id="confirm-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:10000;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:#141418;border:1px solid rgba(239,68,68,0.4);border-radius:18px;padding:24px;max-width:300px;width:100%;text-align:center;animation:modalIn 0.25s ease forwards;">
+    <div style="font-size:32px;margin-bottom:12px;">🗑️</div>
+    <div id="confirm-text" style="font-size:14px;font-weight:600;color:#e5e7eb;margin-bottom:20px;"></div>
+    <div style="display:flex;gap:10px;">
+      <button id="confirm-cancel-btn" style="flex:1;padding:12px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:12px;color:#9ca3af;font-size:13px;font-weight:700;cursor:pointer;">ОТМЕНА</button>
+      <button id="confirm-ok-btn" class="btn-red" style="flex:1;padding:12px;border-radius:12px;font-size:13px;font-weight:700;">УДАЛИТЬ</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// STATE
+// ============================================================
+const STATE = {
+  currentTab: 'home',
+  user: {
+    id: '#F001',
+    name: 'ProPlayer',
+    emoji: '🔥',
+    isPrime: false,
+    elo: 1450,
+    wins: 47,
+    losses: 23,
+    kd: 2.1,
+    avatar: null,
+    verified: false
+  },
+  isAdmin: false,
+  registeredUsers: [],
+  friends: [],
+  friendRequests: [],
+  sentRequests: [],
+  declinedRequests: [],
+  friendChats: {},
+  currentFriendChat: null,
+  reports: [],
+  supportTickets: [],
+  currentTicket: null,
+  pushEnabled: false,
+  bannedUsers: [],
+  isLogged: true,
+};
+
+// ============================================================
+// CUSTOM CONFIRM (замена window.confirm)
+// ============================================================
+function showConfirm(text, onOk){
+  const overlay = document.getElementById('confirm-overlay');
+  document.getElementById('confirm-text').textContent = text;
+  overlay.style.display = 'flex';
+
+  const okBtn = document.getElementById('confirm-ok-btn');
+  const cancelBtn = document.getElementById('confirm-cancel-btn');
+
+  // Клонируем кнопки чтобы убрать старые обработчики
+  const newOk = okBtn.cloneNode(true);
+  const newCancel = cancelBtn.cloneNode(true);
+  okBtn.parentNode.replaceChild(newOk, okBtn);
+  cancelBtn.parentNode.replaceChild(newCancel, cancelBtn);
+
+  newOk.addEventListener('click', ()=>{
+    overlay.style.display = 'none';
+    onOk();
+  });
+  newCancel.addEventListener('click', ()=>{
+    overlay.style.display = 'none';
+  });
+}
+
+// ============================================================
+// UTILS
+// ============================================================
+function toast(msg, dur=2500){
+  const el=document.getElementById('toast');
+  el.textContent=msg; el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),dur);
+}
+
+function now(){
+  const d=new Date();
+  return d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0');
+}
+
+function getUserById(id){
+  if(id===STATE.user.id) return STATE.user;
+  syncRegisteredUsers();
+  return STATE.registeredUsers.find(u=>u.id===id);
+}
+
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+
+// ============================================================
+// PUSH NOTIFICATIONS
+// ============================================================
+function pushNotif(emoji, title, body, onClick){
+  const wrap=document.getElementById('push-notif');
+  const item=document.createElement('div');
+  item.className='push-item';
+  item.innerHTML=`<div style="font-size:24px;flex-shrink:0;">${emoji}</div><div><div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:2px;">${title}</div><div style="font-size:11px;color:#9ca3af;">${body}</div></div>`;
+  if(onClick) item.onclick=onClick;
+  wrap.appendChild(item);
+  setTimeout(()=>{
+    item.classList.add('out');
+    setTimeout(()=>item.remove(),300);
+  },4000);
+}
+
+function requestPushPermission(){
+  if('Notification' in window){
+    Notification.requestPermission().then(p=>{
+      STATE.pushEnabled=(p==='granted');
+      if(STATE.pushEnabled) toast('✅ Пуш-уведомления включены');
+      else toast('❌ Уведомления отклонены — используем встроенные');
+    });
+  }
+}
+
+function sendPush(emoji,title,body,onClick){
+  pushNotif(emoji,title,body,onClick);
+  if(STATE.pushEnabled && Notification.permission==='granted'){
+    new Notification(`${emoji} ${title}`,{body});
+  }
+}
+
+// ============================================================
+// LOGO LONG PRESS → ADMIN
+// ============================================================
+let logoTimer=null;
+const logoBtn=document.getElementById('logo-btn');
+logoBtn.addEventListener('mousedown',()=>{
+  logoBtn.classList.add('logo-glowing');
+  logoTimer=setTimeout(()=>{openAdminPanel();logoBtn.classList.remove('logo-glowing');},2000);
+});
+logoBtn.addEventListener('mouseup',()=>{clearTimeout(logoTimer);logoBtn.classList.remove('logo-glowing');});
+logoBtn.addEventListener('mouseleave',()=>{clearTimeout(logoTimer);logoBtn.classList.remove('logo-glowing');});
+logoBtn.addEventListener('touchstart',()=>{
+  logoBtn.classList.add('logo-glowing');
+  logoTimer=setTimeout(()=>{openAdminPanel();logoBtn.classList.remove('logo-glowing');},2000);
+},{passive:true});
+logoBtn.addEventListener('touchend',()=>{clearTimeout(logoTimer);logoBtn.classList.remove('logo-glowing');});
+
+function openAdminPanel(){
+  STATE.isAdmin=true;
+  switchAdminTab('tools');
+  openModal('admin-modal');
+  toast('🔓 Режим администратора активирован');
+}
+
+// ============================================================
+// ADMIN TAB SWITCHING — ИСПРАВЛЕН
+// ============================================================
+function switchAdminTab(tab){
+  // Скрыть все секции
+  document.getElementById('admin-section-tools').style.display = 'none';
+  document.getElementById('admin-section-reports').style.display = 'none';
+  document.getElementById('admin-section-tickets').style.display = 'none';
+
+  // Сбросить все кнопки
+  ['tools','reports','tickets'].forEach(t=>{
+    const btn=document.getElementById('admin-tab-'+t);
+    if(btn){ btn.style.background='transparent'; btn.style.color='#4b5563'; btn.style.border='none'; }
+  });
+
+  // Показать нужную секцию
+  const colors    = {tools:'rgba(220,38,38,0.15)',  reports:'rgba(245,158,11,0.15)',  tickets:'rgba(16,185,129,0.15)'};
+  const textColors = {tools:'#ef4444',               reports:'#f59e0b',                tickets:'#10b981'};
+  const borderColors={tools:'rgba(220,38,38,0.25)',  reports:'rgba(245,158,11,0.25)', tickets:'rgba(16,185,129,0.25)'};
+
+  const sec = document.getElementById('admin-section-'+tab);
+  const btn = document.getElementById('admin-tab-'+tab);
+
+  if(sec){
+    // tools — block, остальные — flex+column
+    sec.style.display = tab==='tools' ? 'block' : 'flex';
+    if(tab!=='tools') sec.style.flexDirection = 'column';
+  }
+  if(btn){
+    btn.style.background = colors[tab];
+    btn.style.color = textColors[tab];
+    btn.style.border = `1px solid ${borderColors[tab]}`;
+  }
+
+  if(tab==='reports') renderAdminReports();
+  if(tab==='tickets') renderAdminTickets();
+  if(tab==='tools')   renderBannedList();
+}
+
+// ============================================================
+// ADMIN ACTIONS
+// ============================================================
+function adminGiveEloById(){
+  const id=document.getElementById('elo-id-input').value.trim();
+  const val=parseInt(document.getElementById('elo-amount-input').value);
+  if(!id){toast('❌ Введите ID');return;}
+  if(isNaN(val)||val<=0){toast('❌ Введите корректное количество ELO');return;}
+  if(id===STATE.user.id){STATE.user.elo+=val;toast(`⚡ +${val} ELO выдано вам`);renderPage();}
+  else{const u=getUserById(id);if(u){u.elo+=val;toast(`⚡ +${val} ELO выдано ${u.name}`);}else toast('❌ Пользователь не найден');}
+  document.getElementById('elo-id-input').value='';
+  document.getElementById('elo-amount-input').value='';
+}
+
+function adminTakeEloById(){
+  const id=document.getElementById('elo-id-input').value.trim();
+  const val=parseInt(document.getElementById('elo-amount-input').value);
+  if(!id){toast('❌ Введите ID');return;}
+  if(isNaN(val)||val<=0){toast('❌ Введите корректное количество ELO');return;}
+  if(id===STATE.user.id){STATE.user.elo=Math.max(0,STATE.user.elo-val);toast(`⚡ -${val} ELO снято`);renderPage();}
+  else{const u=getUserById(id);if(u){u.elo=Math.max(0,u.elo-val);toast(`⚡ -${val} ELO снято с ${u.name}`);}else toast('❌ Пользователь не найден');}
+  document.getElementById('elo-id-input').value='';
+  document.getElementById('elo-amount-input').value='';
+}
+
+function adminGivePrime(){
+  const id=document.getElementById('prime-id-input').value.trim();
+  const dur=document.getElementById('prime-duration').value;
+  if(!id){toast('❌ Введите ID');return;}
+  const durLabel=dur==='9999'?'навсегда':dur+' дней';
+  if(id===STATE.user.id){STATE.user.isPrime=true;toast(`💎 Prime выдан на ${durLabel}`);renderPage();}
+  else{const u=getUserById(id);if(u){u.isPrime=true;toast(`✅ Prime выдан ${u.name} на ${durLabel}`);}else toast('❌ Пользователь не найден');}
+  document.getElementById('prime-id-input').value='';
+}
+
+function adminVerify(){
+  const id=document.getElementById('verify-id-input').value.trim();
+  if(!id){toast('❌ Введите ID');return;}
+  if(id===STATE.user.id){STATE.user.verified=true;toast('✅ Верификация выдана');renderPage();}
+  else{const u=getUserById(id);if(u){u.verified=true;toast(`✅ Галочка выдана ${u.name}`);}else toast('❌ Пользователь не найден');}
+  document.getElementById('verify-id-input').value='';
+}
+
+function adminUnverify(){
+  const id=document.getElementById('verify-id-input').value.trim();
+  if(!id){toast('❌ Введите ID');return;}
+  if(id===STATE.user.id){STATE.user.verified=false;toast('✕ Верификация снята');renderPage();}
+  else{const u=getUserById(id);if(u){u.verified=false;toast(`✕ Верификация снята с ${u.name}`);}else toast('❌ Пользователь не найден');}
+  document.getElementById('verify-id-input').value='';
+}
+
+function adminBan(){
+  const id=document.getElementById('ban-id-input').value.trim();
+  const reason=document.getElementById('ban-reason-input').value.trim();
+  if(!id){toast('❌ Введите ID');return;}
+  if(!STATE.bannedUsers.find(b=>b.id===id)) STATE.bannedUsers.push({id,reason:reason||'Нарушение правил',time:now()});
+  toast(`🔨 ${id} заблокирован`);
+  document.getElementById('ban-id-input').value='';
+  document.getElementById('ban-reason-input').value='';
+  renderBannedList();
+}
+
+function adminUnban(){
+  const id=document.getElementById('ban-id-input').value.trim();
+  if(!id){toast('❌ Введите ID');return;}
+  STATE.bannedUsers=STATE.bannedUsers.filter(b=>b.id!==id);
+  toast(`✅ ${id} разблокирован`);
+  document.getElementById('ban-id-input').value='';
+  document.getElementById('ban-reason-input').value='';
+  renderBannedList();
+}
+
+function unbanById(id){
+  STATE.bannedUsers=STATE.bannedUsers.filter(b=>b.id!==id);
+  toast(`✅ ${id} разблокирован`);
+  renderBannedList();
+}
+
+function renderBannedList(){
+  const wrap=document.getElementById('banned-list-wrap');
+  const el=document.getElementById('banned-list');
+  if(!el||!wrap)return;
+  if(!STATE.bannedUsers.length){wrap.style.display='none';return;}
+  wrap.style.display='block';
+  el.innerHTML=STATE.bannedUsers.map(b=>`
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;background:rgba(220,38,38,0.07);border:1px solid rgba(220,38,38,0.2);border-radius:8px;">
+      <div>
+        <span style="font-size:12px;font-weight:700;color:#ef4444;">${b.id||b}</span>
+        ${b.reason?`<div style="font-size:10px;color:#4b5563;">${b.reason}</div>`:''}
+      </div>
+      <button onclick="unbanById('${b.id||b}')" style="font-size:10px;font-weight:700;color:#10b981;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:6px;padding:4px 8px;cursor:pointer;">РАЗБАН</button>
+    </div>
+  `).join('');
+}
+
+function renderAdminReports(){
+  const el=document.getElementById('admin-reports-list');
+  const cnt=document.getElementById('admin-reports-count');
+  if(!el)return;
+  const open=STATE.reports.filter(r=>!r.closed).length;
+  if(cnt) cnt.textContent=`${open} открытых / ${STATE.reports.length} всего`;
+  if(!STATE.reports.length){el.innerHTML='<div style="color:#4b5563;font-size:11px;text-align:center;padding:24px;">Жалоб пока нет</div>';return;}
+  el.innerHTML=STATE.reports.map((r,i)=>`
+    <div style="background:rgba(0,0,0,0.3);border-radius:12px;padding:12px;border:1px solid ${r.closed?'var(--border)':'rgba(245,158,11,0.2)'};">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <div><span style="font-size:12px;font-weight:700;color:#f59e0b;">⚠️ На: ${r.target}</span><span style="font-size:9px;color:#4b5563;margin-left:6px;">${r.time||''}</span></div>
+        <span class="${r.closed?'report-closed':'report-open'}">${r.closed?'✓ ЗАКРЫТ':'● ОТКРЫТ'}</span>
+      </div>
+      <div style="font-size:11px;color:#9ca3af;margin-bottom:8px;">📌 ${r.reason}${r.comment?'<br><span style="color:#6b7280;">'+r.comment+'</span>':''}</div>
+      ${!r.closed?`<div style="display:flex;gap:6px;">
+        <button onclick="closeReport(${i})" style="font-size:10px;font-weight:700;color:#10b981;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:8px;padding:5px 10px;cursor:pointer;">✓ Закрыть</button>
+        <button onclick="banFromReport('${r.targetId||r.target}')" style="font-size:10px;font-weight:700;color:#ef4444;background:rgba(220,38,38,0.1);border:1px solid rgba(220,38,38,0.3);border-radius:8px;padding:5px 10px;cursor:pointer;">🔨 Забанить</button>
+      </div>`:''}
+    </div>
+  `).join('');
+}
+
+function closeReport(i){STATE.reports[i].closed=true;renderAdminReports();toast('✅ Репорт закрыт');}
+function banFromReport(id){if(!STATE.bannedUsers.find(b=>b.id===id)) STATE.bannedUsers.push({id,reason:'Бан по репорту',time:now()});toast(`🔨 ${id} забанен`);renderAdminReports();}
+
+function renderAdminTickets(){
+  const el=document.getElementById('admin-tickets-list');
+  const cnt=document.getElementById('admin-tickets-count');
+  if(!el)return;
+  const open=STATE.supportTickets.filter(t=>!t.closed).length;
+  if(cnt) cnt.textContent=`${open} открытых / ${STATE.supportTickets.length} всего`;
+  if(!STATE.supportTickets.length){el.innerHTML='<div style="color:#4b5563;font-size:11px;text-align:center;padding:24px;">Тикетов пока нет</div>';return;}
+  el.innerHTML=STATE.supportTickets.map((t,i)=>`
+    <div style="background:rgba(0,0,0,0.3);border-radius:12px;padding:12px;border:1px solid ${t.closed?'var(--border)':'rgba(16,185,129,0.2)'};">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <span style="font-size:12px;font-weight:700;color:#10b981;">#TKT-${(i+1).toString().padStart(3,'0')}</span>
+        <span class="${t.closed?'report-closed':'report-open'}">${t.closed?'✓ ЗАКРЫТ':'● ОТКРЫТ'}</span>
+      </div>
+      <div style="font-size:11px;color:#9ca3af;margin-bottom:6px;">📋 ${t.topic}</div>
+      <div style="font-size:10px;color:#4b5563;margin-bottom:8px;">${t.messages.length} сообщений</div>
+      <div id="ticket-preview-${i}" style="display:none;background:rgba(0,0,0,0.2);border-radius:8px;padding:8px;margin-bottom:8px;max-height:120px;overflow-y:auto;">${t.messages.map(m=>`<div style="font-size:10px;margin-bottom:4px;"><span style="color:${m.from==='support'?'#10b981':'var(--flame)'};">${m.from==='support'?'🛡 Поддержка':'👤 Игрок'}</span> <span style="color:#6b7280;">${m.time}</span><br><span style="color:#9ca3af;">${m.text}</span></div>`).join('')}</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;">
+        <button onclick="toggleTicketPreview(${i})" style="font-size:10px;font-weight:700;color:#9ca3af;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:5px 10px;cursor:pointer;">👁 Читать</button>
+        ${!t.closed?`
+        <button onclick="adminReplyTicket(${i})" style="font-size:10px;font-weight:700;color:#10b981;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:8px;padding:5px 10px;cursor:pointer;">💬 Ответить</button>
+        <button onclick="adminCloseTicket(${i})" style="font-size:10px;font-weight:700;color:#6b7280;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:5px 10px;cursor:pointer;">✓ Закрыть</button>`:''}
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleTicketPreview(i){const el=document.getElementById('ticket-preview-'+i);if(el)el.style.display=el.style.display==='none'?'block':'none';}
+function adminCloseTicket(i){STATE.supportTickets[i].closed=true;STATE.supportTickets[i].messages.push({from:'support',text:'Ваш тикет закрыт. Спасибо за обращение!',time:now()});sendPush('🎫','Тикет закрыт','Ваше обращение было рассмотрено');renderAdminTickets();toast('✅ Тикет закрыт');}
+function adminReplyTicket(i){const reply=prompt('Введите ответ поддержки:');if(!reply)return;STATE.supportTickets[i].messages.push({from:'support',text:reply,time:now()});sendPush('💬','Ответ от поддержки',reply.substring(0,50));toast('✅ Ответ отправлен');renderAdminTickets();}
+
+// ============================================================
+// REPORT SYSTEM
+// ============================================================
+let reportTargetId=null;
+function openReport(userId){
+  reportTargetId=userId;
+  const user=getUserById(userId)||{name:userId,emoji:'👤',id:userId};
+  document.getElementById('report-target-info').innerHTML=`
+    <div style="display:flex;align-items:center;gap:10px;background:rgba(255,69,0,0.06);border:1px solid rgba(255,69,0,0.2);border-radius:12px;padding:10px 14px;">
+      <div style="font-size:24px;">${user.emoji}</div>
+      <div><div style="font-weight:700;font-size:13px;">${user.name}</div><div style="font-size:11px;color:#4b5563;">${user.id}</div></div>
+    </div>`;
+  document.getElementById('report-comment').value='';
+  document.querySelectorAll('input[name="report-reason"]').forEach(r=>r.checked=false);
+  openModal('report-modal');
+}
+
+function submitReport(){
+  const reason=[...document.querySelectorAll('input[name="report-reason"]')].find(r=>r.checked)?.value;
+  if(!reason){toast('❌ Выберите причину');return;}
+  const comment=document.getElementById('report-comment').value;
+  const user=getUserById(reportTargetId)||{name:reportTargetId};
+  STATE.reports.push({target:user.name,targetId:reportTargetId,reason,comment,time:now(),closed:false});
+  closeModal('report-modal');
+  toast('✅ Репорт отправлен на рассмотрение');
+}
+
+// ============================================================
+// FRIENDS SYSTEM
+// ============================================================
+function getGlobalUsers(){try{return JSON.parse(localStorage.getItem('flamely_global_users')||'[]');}catch(e){return[];}}
+function saveGlobalUsers(list){localStorage.setItem('flamely_global_users',JSON.stringify(list));}
+function registerCurrentUser(){
+  const list=getGlobalUsers();
+  const exists=list.find(u=>u.id===STATE.user.id);
+  const me={id:STATE.user.id,name:STATE.user.name,emoji:STATE.user.emoji,isPrime:STATE.user.isPrime,verified:STATE.user.verified||false,elo:STATE.user.elo,status:'online',lastSeen:Date.now()};
+  if(exists){Object.assign(exists,me);}else{list.push(me);}
+  saveGlobalUsers(list);
+}
+
+function syncRegisteredUsers(){
+  const list=getGlobalUsers().filter(u=>u.id!==STATE.user.id);
+  list.forEach(u=>{u.status=u.lastSeen&&(Date.now()-u.lastSeen)<120000?'online':'offline';});
+  STATE.registeredUsers=list;
+}
+
+function getIncomingRequests(){try{return JSON.parse(localStorage.getItem('flamely_req_'+STATE.user.id)||'[]');}catch(e){return[];}}
+function addIncomingRequest(targetId,fromUser){const reqs=JSON.parse(localStorage.getItem('flamely_req_'+targetId)||'[]');if(!reqs.find(r=>r.id===fromUser.id))reqs.push(fromUser);localStorage.setItem('flamely_req_'+targetId,JSON.stringify(reqs));}
+function removeIncomingRequest(fromId){const reqs=getIncomingRequests().filter(r=>r.id!==fromId);localStorage.setItem('flamely_req_'+STATE.user.id,JSON.stringify(reqs));}
+
+function updateFriendsBadge(){
+  syncRegisteredUsers();
+  const incoming=getIncomingRequests();
+  const newReqs=incoming.filter(r=>!STATE.friends.includes(r.id)&&!STATE.declinedRequests?.includes(r.id));
+  STATE.friendRequests=newReqs.map(r=>r.id);
+  const cnt=STATE.friendRequests.length;
+  const dot=document.getElementById('friends-dot');
+  const bell=document.getElementById('notif-count');
+  if(cnt>0){
+    if(dot) dot.style.display='block';
+    if(bell){bell.style.display='flex';bell.textContent=cnt;}
+  } else {
+    if(dot) dot.style.display='none';
+    if(bell) bell.style.display='none';
+  }
+}
+
+function sendFriendRequest(userId){
+  if(STATE.friends.includes(userId)){toast('👥 Уже в друзьях');return;}
+  if(STATE.sentRequests.includes(userId)){toast('⏳ Заявка уже отправлена');return;}
+  STATE.sentRequests.push(userId);
+  addIncomingRequest(userId,{id:STATE.user.id,name:STATE.user.name,emoji:STATE.user.emoji,elo:STATE.user.elo,isPrime:STATE.user.isPrime});
+  const u=STATE.registeredUsers.find(r=>r.id===userId);
+  toast(`✅ Заявка отправлена ${u?u.name:userId}`);
+  closeModal('add-friend-modal');
+  saveData();
+  renderPage();
+}
+
+function acceptFriendRequest(userId){
+  removeIncomingRequest(userId);
+  STATE.friendRequests=STATE.friendRequests.filter(id=>id!==userId);
+  if(!STATE.friends.includes(userId)) STATE.friends.push(userId);
+  updateFriendsBadge();
+  const u=STATE.registeredUsers.find(r=>r.id===userId)||{name:userId};
+  toast(`🤝 ${u.name} добавлен в друзья!`);
+  saveData();
+  renderPage();
+}
+
+function declineFriendRequest(userId){
+  removeIncomingRequest(userId);
+  STATE.friendRequests=STATE.friendRequests.filter(id=>id!==userId);
+  if(!STATE.declinedRequests) STATE.declinedRequests=[];
+  STATE.declinedRequests.push(userId);
+  updateFriendsBadge();
+  const u=STATE.registeredUsers.find(r=>r.id===userId)||{name:userId};
+  toast(`❌ Заявка отклонена`);
+  saveData();
+  renderPage();
+}
+
+// ИСПРАВЛЕНО: removeFriend использует showConfirm вместо window.confirm
+function removeFriend(userId){
+  const u=getUserById(userId)||{name:userId};
+  showConfirm(`Удалить ${u.name} из друзей?`, ()=>{
+    STATE.friends=STATE.friends.filter(id=>id!==userId);
+    toast('🗑️ Удалён из друзей');
+    saveData();
+    renderPage();
+  });
+}
+
+function openAddFriendModal(){
+  syncRegisteredUsers();
+  openModal('add-friend-modal');
+  document.getElementById('friend-search-results').innerHTML='<div style="text-align:center;color:#4b5563;font-size:12px;padding:20px;">Введите ник или ID для поиска</div>';
+  document.getElementById('friend-search-input').value='';
+  setTimeout(()=>document.getElementById('friend-search-input').focus(),100);
+}
+
+function searchFriends(){
+  const q=document.getElementById('friend-search-input').value.trim().toLowerCase();
+  const el=document.getElementById('friend-search-results');
+  syncRegisteredUsers();
+  if(!q){el.innerHTML='<div style="text-align:center;color:#4b5563;font-size:12px;padding:20px;">Введите ник или ID для поиска</div>';return;}
+  const results=STATE.registeredUsers.filter(u=>(u.name.toLowerCase().includes(q)||u.id.toLowerCase().includes(q))&&u.id!==STATE.user.id);
+  if(!results.length){
+    el.innerHTML=`<div style="text-align:center;padding:20px;"><div style="font-size:28px;margin-bottom:8px;">🔍</div><div style="color:#4b5563;font-size:12px;">Игрок не найден</div></div>`;
+    return;
+  }
+  el.innerHTML=results.map(u=>{
+    const isFriend=STATE.friends.includes(u.id);
+    const isPending=STATE.sentRequests.includes(u.id);
+    return `<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--card2);border:1px solid var(--border);border-radius:12px;">
+      <div style="font-size:24px;">${u.emoji}</div>
+      <div style="flex:1;"><div style="font-weight:700;font-size:13px;">${u.name} ${u.isPrime?'<span class="badge-prime">PRIME</span>':''}</div>
+      <div style="font-size:10px;color:#4b5563;">${u.id} · ELO ${u.elo} · <span style="color:${u.status==='online'?'#10b981':'#374151'}">${u.status==='online'?'Онлайн':'Офлайн'}</span></div></div>
+      ${isFriend?'<span style="font-size:10px;color:#10b981;font-weight:700;">✓ ДРУГ</span>'
+      :isPending?'<span style="font-size:10px;color:#f59e0b;font-weight:700;">⏳</span>'
+      :`<button onclick="sendFriendRequest('${u.id}')" class="btn-flame" style="padding:6px 14px;border-radius:10px;font-size:11px;">ДОБАВИТЬ</button>`}
+    </div>`;
+  }).join('');
+}
+
+// ============================================================
+// FRIEND CHAT
+// ============================================================
+function getChatKey(a,b){return 'flamely_chat_'+(a<b?a+'_'+b:b+'_'+a);}
+function getGlobalChat(userId){try{return JSON.parse(localStorage.getItem(getChatKey(STATE.user.id,userId))||'[]');}catch(e){return[];}}
+function saveGlobalChat(userId,msgs){localStorage.setItem(getChatKey(STATE.user.id,userId),JSON.stringify(msgs));}
+
+function openFriendChat(userId){
+  const u=STATE.registeredUsers.find(r=>r.id===userId)||{id:userId,name:userId,emoji:'👤',status:'offline'};
+  STATE.currentFriendChat=userId;
+  document.getElementById('fc-avatar').textContent=u.emoji;
+  document.getElementById('fc-name').innerHTML=`${u.name} ${u.isPrime?'<span class="badge-prime">PRIME</span>':''}`;
+  document.getElementById('fc-status').textContent=u.status==='online'?'🟢 Онлайн':'⚫ Не в сети';
+  renderFriendChat();
+  openModal('friend-chat-modal');
+  setTimeout(()=>document.getElementById('fc-input').focus(),100);
+  clearInterval(window._chatPoll);
+  window._chatPoll=setInterval(()=>{if(STATE.currentFriendChat===userId)renderFriendChat();},2000);
+}
+
+function renderFriendChat(){
+  const msgs=getGlobalChat(STATE.currentFriendChat);
+  const el=document.getElementById('fc-messages');
+  if(!msgs.length){el.innerHTML='<div style="text-align:center;color:#4b5563;font-size:12px;padding:20px;">Начните общение 👋</div>';return;}
+  el.innerHTML=msgs.map(m=>`
+    <div style="display:flex;flex-direction:column;">
+      <div class="${m.from===STATE.user.id?'bubble-me':'bubble-them'}">
+        <div class="bubble-text">${m.text}</div>
+        <div class="bubble-time">${m.time}</div>
+      </div>
+    </div>`).join('');
+  el.scrollTop=el.scrollHeight;
+}
+
+function sendFriendMsg(){
+  const input=document.getElementById('fc-input');
+  const text=input.value.trim();
+  if(!text)return;
+  const msgs=getGlobalChat(STATE.currentFriendChat);
+  msgs.push({from:STATE.user.id,text,time:now()});
+  saveGlobalChat(STATE.currentFriendChat,msgs);
+  input.value='';
+  renderFriendChat();
+}
+
+// ============================================================
+// SUPPORT TICKETS
+// ============================================================
+function openSupportTicket(topic){
+  const ticket={topic,messages:[{from:'support',text:`Привет! Ваше обращение по теме "${topic}" принято. Как мы можем помочь?`,time:now()}],closed:false};
+  STATE.supportTickets.push(ticket);
+  STATE.currentTicket=STATE.supportTickets.length-1;
+  openTicketModal(STATE.currentTicket);
+}
+
+function openTicketModal(i){
+  STATE.currentTicket=i;
+  const t=STATE.supportTickets[i];
+  document.getElementById('ticket-modal-title').textContent=`💬 ${t.topic}`;
+  renderTicketMessages();
+  openModal('ticket-modal');
+  setTimeout(()=>document.getElementById('ticket-input').focus(),100);
+}
+
+function renderTicketMessages(){
+  const t=STATE.supportTickets[STATE.currentTicket];
+  if(!t)return;
+  const el=document.getElementById('ticket-messages');
+  el.innerHTML=t.messages.map(m=>`
+    <div class="chat-msg">
+      <span class="sender ${m.from==='support'?'support':''}">${m.from==='support'?'🛡️ Поддержка':STATE.user.name}</span>
+      <span class="ts">${m.time}</span><br>
+      <span class="text">${m.text}</span>
+    </div>`).join('');
+  el.scrollTop=el.scrollHeight;
+}
+
+function sendTicketMsg(){
+  const input=document.getElementById('ticket-input');
+  const text=input.value.trim();
+  if(!text)return;
+  const t=STATE.supportTickets[STATE.currentTicket];
+  if(t.closed){toast('❌ Тикет закрыт');return;}
+  t.messages.push({from:'user',text,time:now()});
+  input.value='';
+  renderTicketMessages();
+  setTimeout(()=>{t.messages.push({from:'support',text:'Спасибо за сообщение! Наш специалист скоро ответит.',time:now()});renderTicketMessages();},1500);
+}
+
+// ============================================================
+// TAB RENDER
+// ============================================================
+function openTab(name){
+  STATE.currentTab=name;
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  const el=document.getElementById('tab-'+name);
+  if(el)el.classList.add('active');
+  renderPage();
+  window.scrollTo(0,0);
+}
+
+function updateNavAvatar(){
+  const nav=document.getElementById('nav-av');
+  if(!nav)return;
+  if(STATE.user.avatar){
+    nav.innerHTML=`<img src="${STATE.user.avatar}" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">`;
+  } else {
+    nav.textContent=STATE.user.emoji;
+  }
+}
+
+function renderPage(){
+  const content=document.getElementById('app-content');
+  switch(STATE.currentTab){
+    case 'home':    content.innerHTML=renderHome(); break;
+    case 'friends': content.innerHTML=renderFriends(); break;
+    case 'lobby':   content.innerHTML=renderLobby(); break;
+    case 'elo':     content.innerHTML=renderElo(); break;
+    case 'support': content.innerHTML=renderSupport(); break;
+    case 'profile': content.innerHTML=renderProfile(); break;
+  }
+  updateFriendsBadge();
+  updateNavAvatar();
+}
+
+// ============================================================
+// ELO CHECK PAGE
+// ============================================================
+function renderElo(){
+  const u=STATE.user;
+  const winRate=u.wins+u.losses>0?Math.round(u.wins/(u.wins+u.losses)*100):0;
+  const rank=u.elo>=2000?{name:'МАСТЕР',color:'#f59e0b',emoji:'👑'}
+    :u.elo>=1600?{name:'БРИЛЛИАНТ',color:'#60a5fa',emoji:'💎'}
+    :u.elo>=1400?{name:'ПЛАТИНА',color:'#a78bfa',emoji:'🔮'}
+    :u.elo>=1200?{name:'ЗОЛОТО',color:'#fbbf24',emoji:'🥇'}
+    :u.elo>=1000?{name:'СЕРЕБРО',color:'#9ca3af',emoji:'🥈'}
+    :{name:'БРОНЗА',color:'#f97316',emoji:'🥉'};
+
+  return `<div class="page">
+    <div class="font-display" style="font-size:32px;letter-spacing:3px;margin-bottom:6px;">ELO РЕЙТИНГ</div>
+    <div style="font-size:12px;color:#4b5563;margin-bottom:20px;">Твой текущий рейтинг и проверка через бота</div>
+
+    <!-- ELO CARD -->
+    <div style="background:linear-gradient(135deg,rgba(255,69,0,0.12),rgba(139,92,246,0.08));border:1px solid var(--border-flame);border-radius:20px;padding:24px;margin-bottom:16px;text-align:center;">
+      <div style="font-size:48px;margin-bottom:8px;">${rank.emoji}</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:4px;color:${rank.color};margin-bottom:6px;">${rank.name}</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:64px;line-height:1;color:#fff;margin-bottom:4px;">${u.elo}</div>
+      <div style="font-size:11px;color:#4b5563;font-weight:700;letter-spacing:2px;">ELO ОЧКОВ</div>
+    </div>
+
+    <!-- STATS ROW -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px;">
+      <div class="stat-card"><div class="stat-value" style="color:var(--green);">${u.wins}</div><div class="stat-label">ПОБЕДЫ</div></div>
+      <div class="stat-card"><div class="stat-value" style="color:#ef4444;">${u.losses}</div><div class="stat-label">ПОРАЖ.</div></div>
+      <div class="stat-card"><div class="stat-value" style="color:var(--flame);">${winRate}%</div><div class="stat-label">ВИНРЕЙТ</div></div>
+    </div>
+
+    <!-- BOT INSTRUCTION CARD -->
+    <div style="background:rgba(0,136,204,0.08);border:1px solid rgba(0,136,204,0.3);border-radius:20px;padding:20px;margin-bottom:16px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+        <div style="width:44px;height:44px;background:linear-gradient(135deg,#0088cc,#00b4d8);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">✈️</div>
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#38bdf8;">ПРОВЕРКА ELO ЧЕРЕЗ БОТА</div>
+          <div style="font-size:11px;color:#4b5563;">@FlamelyElobot — официальный бот FLAMELY</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:rgba(0,0,0,0.3);border-radius:12px;">
+          <div style="width:28px;height:28px;background:rgba(255,69,0,0.2);border:1px solid rgba(255,69,0,0.4);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--flame);flex-shrink:0;">1</div>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:#e5e7eb;margin-bottom:2px;">Запусти бота</div>
+            <div style="font-size:11px;color:#6b7280;">Найди <span style="color:#38bdf8;font-weight:700;">@FlamelyElobot</span> в Telegram и нажми /start</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:rgba(0,0,0,0.3);border-radius:12px;">
+          <div style="width:28px;height:28px;background:rgba(255,69,0,0.2);border:1px solid rgba(255,69,0,0.4);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--flame);flex-shrink:0;">2</div>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:#e5e7eb;margin-bottom:2px;">Отправь свой ID</div>
+            <div style="font-size:11px;color:#6b7280;">Напиши боту свой FLAMELY ID: <span style="color:var(--flame);font-weight:700;font-family:'JetBrains Mono',monospace;">${u.id}</span></div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:rgba(0,0,0,0.3);border-radius:12px;">
+          <div style="width:28px;height:28px;background:rgba(255,69,0,0.2);border:1px solid rgba(255,69,0,0.4);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--flame);flex-shrink:0;">3</div>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:#e5e7eb;margin-bottom:2px;">Прикрепи фото результата матча</div>
+            <div style="font-size:11px;color:#6b7280;">Отправь скриншот итогового экрана матча боту как фото</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);border-radius:12px;">
+          <div style="width:28px;height:28px;background:rgba(16,185,129,0.2);border:1px solid rgba(16,185,129,0.4);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">✅</div>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:#10b981;margin-bottom:2px;">Ожидай ответа</div>
+            <div style="font-size:11px;color:#6b7280;">Администратор проверит результат и зачислит ELO на твой аккаунт</div>
+          </div>
+        </div>
+      </div>
+
+      <a href="https://t.me/FlamelyElobot" target="_blank" style="text-decoration:none;display:block;">
+        <button style="width:100%;padding:14px;background:linear-gradient(135deg,#0088cc,#00b4d8);border:none;border-radius:14px;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;cursor:pointer;box-shadow:0 0 20px rgba(0,136,204,0.4);transition:all 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
+          ✈️ ОТКРЫТЬ @FlamelyElobot
+        </button>
+      </a>
+    </div>
+
+    <!-- COPY ID SHORTCUT -->
+    <div style="background:rgba(255,69,0,0.07);border:1px solid rgba(255,69,0,0.2);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;">
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;letter-spacing:2px;color:#4b5563;margin-bottom:4px;">МОЙ FLAMELY ID</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--flame);">${u.id}</div>
+      </div>
+      <button onclick="navigator.clipboard&&navigator.clipboard.writeText('${u.id}').then(()=>toast('📋 ID скопирован!'))" style="padding:10px 16px;background:rgba(255,69,0,0.12);border:1px solid rgba(255,69,0,0.3);border-radius:10px;color:var(--flame);font-size:12px;font-weight:700;cursor:pointer;">КОПИРОВАТЬ</button>
+    </div>
+  </div>`;
+}
+
+// ============================================================
+// HOME
+// ============================================================
+function renderHome(){
+  return `<div class="page">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;padding:20px;background:var(--card);border:1px solid var(--border-flame);border-radius:20px;">
+      <div onclick="openTab('profile')" style="width:56px;height:56px;border-radius:14px;border:2px solid rgba(255,69,0,0.4);overflow:hidden;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--card2);font-size:36px;cursor:pointer;">
+        ${STATE.user.avatar?`<img src="${STATE.user.avatar}" style="width:100%;height:100%;object-fit:cover;">`:`${STATE.user.emoji}`}
+      </div>
+      <div style="flex:1;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+          <div style="font-family:'Bebas Neue';font-size:22px;letter-spacing:1px;">${STATE.user.name}</div>
+          ${STATE.user.isPrime?'<span class="badge-prime">PRIME</span>':'<span class="badge-free">FREE</span>'}
+        </div>
+        <div style="font-size:11px;color:#4b5563;margin-bottom:8px;">${STATE.user.id} · ELO ${STATE.user.elo}</div>
+        <div style="display:flex;gap:6px;"><div class="dot-online"></div><span style="font-size:11px;color:#10b981;font-weight:600;">Онлайн</span></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px;">
+      <div class="stat-card"><div class="stat-value" style="color:var(--green);">${STATE.user.wins}</div><div class="stat-label">ПОБЕДЫ</div></div>
+      <div class="stat-card"><div class="stat-value" style="color:#ef4444;">${STATE.user.losses}</div><div class="stat-label">ПОРАЖ.</div></div>
+      <div class="stat-card"><div class="stat-value" style="color:var(--flame);">${STATE.user.kd}</div><div class="stat-label">K/D</div></div>
+    </div>
+    <div style="margin-bottom:16px;">
+      <button onclick="requestPushPermission()" style="width:100%;padding:14px;background:rgba(139,92,246,0.12);border:1px solid rgba(139,92,246,0.3);border-radius:14px;color:var(--prime2);font-weight:700;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;">
+        🔔 Включить пуш-уведомления
+      </button>
+    </div>
+    <div style="margin-bottom:20px;">
+      <div class="section-label" style="margin-bottom:10px;">БЫСТРЫЕ ДЕЙСТВИЯ</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <button onclick="openTab('lobby')" class="btn-flame" style="padding:16px;border-radius:16px;font-size:16px;">⚔️ ИГРАТЬ</button>
+        <button onclick="openTab('friends')" class="btn-ghost" style="padding:16px;border-radius:16px;font-size:13px;font-weight:700;">👥 ДРУЗЬЯ<br><span style="font-size:10px;color:var(--flame);">${STATE.friends.length} друзей</span></button>
+      </div>
+    </div>
+    <div class="card card-prime" style="padding:20px;margin-bottom:16px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <div style="font-size:24px;">💎</div>
+        <div><div class="font-display" style="font-size:22px;letter-spacing:2px;">PRIME ПОДПИСКА</div><div style="font-size:11px;color:#a78bfa;">Максимальные возможности</div></div>
+      </div>
+      <div style="font-size:12px;color:#6b7280;margin-bottom:12px;">Без рекламы · Приоритетный поиск · Эксклюзивные рамки · Расширенная статистика</div>
+      ${!STATE.user.isPrime?`<button onclick="toast('🔜 Переход на оплату...')" class="btn-prime" style="width:100%;padding:12px;border-radius:12px;font-size:16px;">ПОЛУЧИТЬ PRIME</button>`
+      :`<div style="text-align:center;color:#a78bfa;font-weight:700;font-size:13px;">✓ У вас активна подписка PRIME</div>`}
+    </div>
+    <div>
+      <div class="section-label" style="margin-bottom:10px;">ДРУЗЬЯ ОНЛАЙН</div>
+      ${STATE.friends.length===0?`<div style="text-align:center;color:#4b5563;font-size:12px;padding:20px;">Нет друзей онлайн</div>`
+      :STATE.friends.slice(0,3).map(id=>{
+        const u=getUserById(id);if(!u)return'';
+        const dotClass=u.status==='online'?'dot-online':'dot-offline';
+        return `<div class="lobby-row" style="margin-bottom:8px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="font-size:24px;">${u.emoji}</div>
+            <div><div style="font-weight:700;font-size:13px;">${u.name}</div><div style="display:flex;align-items:center;gap:5px;margin-top:2px;"><div class="${dotClass}"></div><span style="font-size:10px;color:#6b7280;">Онлайн</span></div></div>
+          </div>
+          <button onclick="openFriendChat('${u.id}')" class="btn-ghost" style="padding:6px 14px;border-radius:10px;font-size:11px;font-weight:700;">💬</button>
+        </div>`;
+      }).join('')}
+    </div>
+  </div>`;
+}
+
+// ============================================================
+// FRIENDS PAGE
+// ============================================================
+function renderFriends(){
+  syncRegisteredUsers();
+  updateFriendsBadge();
+  const friends=STATE.friends;
+  return `<div class="page">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+      <div class="font-display" style="font-size:28px;letter-spacing:2px;">ДРУЗЬЯ</div>
+      <button onclick="openAddFriendModal()" class="btn-flame" style="padding:8px 18px;border-radius:12px;font-size:13px;">+ ДОБАВИТЬ</button>
+    </div>
+    <div style="background:rgba(255,69,0,0.07);border:1px solid rgba(255,69,0,0.25);border-radius:14px;padding:14px 16px;margin-bottom:16px;display:flex;align-items:center;gap:12px;">
+      <div style="font-size:28px;">${STATE.user.emoji}</div>
+      <div style="flex:1;">
+        <div style="font-size:10px;font-weight:700;letter-spacing:2px;color:#4b5563;margin-bottom:4px;">МОЙ ID</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--flame);letter-spacing:2px;">${STATE.user.id}</div>
+        <div style="font-size:11px;color:#4b5563;margin-top:2px;">Поделись ID с друзьями</div>
+      </div>
+      <button onclick="navigator.clipboard&&navigator.clipboard.writeText('${STATE.user.id}').then(()=>toast('📋 ID скопирован!'))" style="padding:8px 12px;background:rgba(255,69,0,0.12);border:1px solid rgba(255,69,0,0.3);border-radius:10px;color:var(--flame);font-size:12px;font-weight:700;cursor:pointer;">КОПИРОВАТЬ</button>
+    </div>
+
+    ${STATE.friendRequests.length>0?`
+    <div style="margin-bottom:20px;">
+      <div class="section-label" style="margin-bottom:10px;">ВХОДЯЩИЕ ЗАЯВКИ (${STATE.friendRequests.length})</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        ${getIncomingRequests().filter(r=>!STATE.friends.includes(r.id)).map(u=>`
+          <div style="background:rgba(255,69,0,0.06);border:1px solid rgba(255,69,0,0.25);border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:10px;">
+            <div style="font-size:28px;">${u.emoji||'👤'}</div>
+            <div style="flex:1;"><div style="font-weight:700;font-size:13px;">${u.name}</div><div style="font-size:10px;color:#4b5563;">${u.id} · ELO ${u.elo||'?'}</div></div>
+            <button onclick="acceptFriendRequest('${u.id}')" style="font-size:11px;font-weight:700;color:#10b981;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:8px;padding:6px 12px;cursor:pointer;margin-right:4px;">✓</button>
+            <button onclick="declineFriendRequest('${u.id}')" style="font-size:11px;font-weight:700;color:#ef4444;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:8px;padding:6px 12px;cursor:pointer;">✕</button>
+          </div>`).join('')}
+      </div>
+    </div>`:''}
+
+    <div class="section-label" style="margin-bottom:10px;">МОИ ДРУЗЬЯ (${friends.length})</div>
+    ${friends.length===0?`<div style="text-align:center;color:#4b5563;font-size:12px;padding:30px;border:1px dashed rgba(255,255,255,0.08);border-radius:16px;">Нет друзей<br><span style="font-size:10px;margin-top:4px;display:block;">Поделись своим ID и добавляй друзей →</span></div>`
+    :`<div style="display:flex;flex-direction:column;gap:8px;">
+      ${friends.map(id=>{
+        const u=getUserById(id)||{id,name:id,emoji:'👤',status:'offline',elo:0};
+        const dotClass=u.status==='online'?'dot-online':'dot-offline';
+        return `<div class="lobby-row">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="font-size:32px;">${u.emoji}</div>
+            <div>
+              <div style="font-weight:700;font-size:13px;">${u.name} ${u.isPrime?'<span class="badge-prime">PRIME</span>':''} ${u.verified?'<span style="color:#10b981;font-size:12px;">✅</span>':''}</div>
+              <div style="display:flex;align-items:center;gap:5px;margin-top:3px;"><div class="${dotClass}"></div><span style="font-size:10px;color:#6b7280;">${u.status==='online'?'Онлайн':'Не в сети'} · ELO ${u.elo}</span></div>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;">
+            <button onclick="openFriendChat('${u.id}')" class="btn-ghost" style="padding:7px 12px;border-radius:10px;font-size:13px;">💬</button>
+            <button onclick="openReport('${u.id}')" style="font-size:11px;font-weight:700;color:#ef4444;background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.2);border-radius:8px;padding:6px 10px;cursor:pointer;">⚠️</button>
+            <button onclick="removeFriend('${u.id}')" style="font-size:11px;color:#4b5563;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:6px 10px;cursor:pointer;">🗑️</button>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>`}
+
+    ${STATE.sentRequests.filter(id=>!STATE.friends.includes(id)).length>0?`
+    <div style="margin-top:20px;">
+      <div class="section-label" style="margin-bottom:10px;">ОТПРАВЛЕННЫЕ ЗАЯВКИ</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        ${STATE.sentRequests.filter(id=>!STATE.friends.includes(id)).map(id=>{
+          const u=getUserById(id);if(!u)return'';
+          return `<div class="lobby-row" style="opacity:0.6;">
+            <div style="display:flex;align-items:center;gap:10px;"><div style="font-size:24px;">${u.emoji}</div><div style="font-weight:700;font-size:13px;">${u.name}</div></div>
+            <span style="font-size:10px;color:#f59e0b;font-weight:700;">⏳ ОЖИДАНИЕ</span>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`:''}
+  </div>`;
+}
+
+// ============================================================
+// LOBBY
+// ============================================================
+function renderLobby(){
+  return `<div class="page">
+    <div class="font-display" style="font-size:32px;letter-spacing:3px;margin-bottom:20px;">ЛОББИ</div>
+    <div style="display:flex;justify-content:center;margin-bottom:28px;">
+      <div style="text-align:center;">
+        <div id="queue-btn" onclick="toggleQueue()" style="width:152px;height:152px;border-radius:50%;background:var(--card2);border:2px solid rgba(255,255,255,0.08);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;transition:all 0.3s;margin:0 auto 12px;">
+          <div style="font-size:36px;">⚔️</div>
+          <div class="font-display" style="font-size:20px;letter-spacing:2px;color:var(--flame);">ИГРАТЬ</div>
+          <div style="font-size:10px;color:#4b5563;">Нажмите для входа</div>
+        </div>
+        <div id="queue-status" style="font-size:11px;color:#4b5563;font-weight:600;"></div>
+      </div>
+    </div>
+    <div class="section-label" style="margin-bottom:10px;">ПРИГЛАСИТЬ ДРУЗЕЙ</div>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px;">
+      ${STATE.friends.length===0?`<div style="text-align:center;color:#4b5563;font-size:12px;padding:20px;">Нет друзей для приглашения</div>`
+      :STATE.friends.map(id=>{
+        const u=getUserById(id);if(!u)return'';
+        return `<div class="lobby-row">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div style="font-size:24px;">${u.emoji}</div>
+            <div><div style="font-weight:700;font-size:13px;">${u.name}</div><div style="font-size:10px;color:#4b5563;">ELO ${u.elo}</div></div>
+          </div>
+          ${u.status!=='offline'?`<button onclick="toast('📨 Приглашение отправлено ${u.name}')" class="btn-flame" style="padding:7px 14px;border-radius:10px;font-size:11px;">ПРИГЛАСИТЬ</button>`
+          :`<span style="font-size:10px;color:#374151;font-weight:600;">ОФЛАЙН</span>`}
+        </div>`;
+      }).join('')}
+    </div>
+  </div>`;
+}
+
+let queueActive=false,queueInterval=null;
+function toggleQueue(){
+  const btn=document.getElementById('queue-btn');
+  const status=document.getElementById('queue-status');
+  if(!btn||!status)return;
+  queueActive=!queueActive;
+  if(queueActive){
+    btn.style.borderColor='var(--flame)';
+    btn.style.boxShadow='0 0 30px rgba(255,69,0,0.3)';
+    btn.innerHTML=`<div style="font-size:36px;">⏳</div><div class="font-display" style="font-size:18px;letter-spacing:2px;color:var(--flame);">ПОИСК...</div><div style="font-size:10px;color:#4b5563;">Нажмите для отмены</div>`;
+    let t=0;
+    queueInterval=setInterval(()=>{
+      t++;
+      if(status) status.textContent=`⏱ ${Math.floor(t/60).toString().padStart(2,'0')}:${(t%60).toString().padStart(2,'0')}`;
+      if(t===8){
+        clearInterval(queueInterval);queueActive=false;
+        if(btn){btn.style.borderColor='rgba(255,255,255,0.08)';btn.style.boxShadow='';btn.innerHTML=`<div style="font-size:36px;">⚔️</div><div class="font-display" style="font-size:20px;letter-spacing:2px;color:var(--flame);">ИГРАТЬ</div><div style="font-size:10px;color:#4b5563;">Нажмите для входа</div>`;}
+        if(status) status.textContent='';
+        sendPush('⚔️','Матч найден!','Подтвердите участие',()=>toast('Матч подтверждён!'));
+      }
+    },1000);
+  } else {
+    clearInterval(queueInterval);
+    if(btn){btn.style.borderColor='rgba(255,255,255,0.08)';btn.style.boxShadow='';btn.innerHTML=`<div style="font-size:36px;">⚔️</div><div class="font-display" style="font-size:20px;letter-spacing:2px;color:var(--flame);">ИГРАТЬ</div><div style="font-size:10px;color:#4b5563;">Нажмите для входа</div>`;}
+    if(status) status.textContent='';
+  }
+}
+
+// ============================================================
+// SUPPORT
+// ============================================================
+function renderSupport(){
+  const topics=[
+    {emoji:'⚠️',title:'Репорт игрока',desc:'Пожаловаться на читера или нарушителя'},
+    {emoji:'💎',title:'Вопрос по Prime',desc:'Подписка, оплата, активация'},
+    {emoji:'🔑',title:'Проблема с аккаунтом',desc:'Вход, безопасность, восстановление'},
+    {emoji:'⚙️',title:'Технические проблемы',desc:'Баги, ошибки, лаги'},
+    {emoji:'📊',title:'Ошибка в рейтинге',desc:'Неверный ELO или статистика'},
+    {emoji:'💬',title:'Другое',desc:'Любой другой вопрос'},
+  ];
+  return `<div class="page">
+    <div class="font-display" style="font-size:32px;letter-spacing:3px;margin-bottom:6px;">ПОДДЕРЖКА</div>
+    <div style="font-size:12px;color:#4b5563;margin-bottom:20px;">Выберите тему обращения</div>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:24px;">
+      ${topics.map(t=>`
+        <div onclick="openSupportTicket('${t.title}')" style="display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--card2);border:1px solid var(--border);border-radius:14px;cursor:pointer;transition:border-color 0.2s;" onmouseover="this.style.borderColor='rgba(16,185,129,0.3)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="font-size:28px;">${t.emoji}</div>
+          <div style="flex:1;"><div style="font-weight:700;font-size:13px;">${t.title}</div><div style="font-size:11px;color:#4b5563;">${t.desc}</div></div>
+          <div style="color:#4b5563;font-size:16px;">›</div>
+        </div>`).join('')}
+    </div>
+    ${STATE.supportTickets.length>0?`
+    <div>
+      <div class="section-label" style="margin-bottom:10px;">МОИ ОБРАЩЕНИЯ</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        ${STATE.supportTickets.map((t,i)=>`
+          <div onclick="openTicketModal(${i})" style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card2);border:1px solid var(--border);border-radius:12px;cursor:pointer;">
+            <div style="flex:1;"><div style="font-weight:700;font-size:12px;">#TKT-${(i+1).toString().padStart(3,'0')} · ${t.topic}</div><div style="font-size:10px;color:#4b5563;margin-top:2px;">${t.messages.length} сообщений</div></div>
+            <span class="${t.closed?'report-closed':'report-open'}">${t.closed?'ЗАКРЫТ':'ОТКРЫТ'}</span>
+          </div>`).join('')}
+      </div>
+    </div>`:''}
+  </div>`;
+}
+
+// ============================================================
+// PROFILE — ИСПРАВЛЕНО uploadAvatar
+// ============================================================
+function renderProfile(){
+  const u=STATE.user;
+  const avatarHtml=u.avatar
+    ?`<img src="${u.avatar}" style="width:100%;height:100%;object-fit:cover;border-radius:18px;">`
+    :`<span style="font-size:40px;">${u.emoji}</span>`;
+  return `<div class="page">
+    <div style="padding:20px;background:var(--card);border:1px solid var(--border-flame);border-radius:20px;margin-bottom:20px;">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;">
+        <div onclick="uploadAvatar()" style="width:80px;height:80px;border-radius:18px;border:2px solid rgba(255,69,0,0.4);display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer;position:relative;flex-shrink:0;background:var(--card2);" title="Нажми чтобы сменить фото">
+          ${avatarHtml}
+          <div style="position:absolute;inset:0;background:rgba(0,0,0,0);display:flex;align-items:center;justify-content:center;border-radius:18px;transition:background 0.2s;" onmouseover="this.style.background='rgba(0,0,0,0.5)'" onmouseout="this.style.background='rgba(0,0,0,0)'">
+            <span style="font-size:22px;opacity:0.8;">📷</span>
+          </div>
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px;">
+            <div class="font-display" style="font-size:22px;letter-spacing:1px;">${u.name}</div>
+            ${u.isPrime?'<span class="badge-prime">PRIME</span>':'<span class="badge-free">FREE</span>'}
+            ${u.verified?'<span style="background:linear-gradient(135deg,#059669,#10b981);color:#fff;font-size:9px;padding:2px 8px;border-radius:20px;font-weight:700;">✅</span>':''}
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#4b5563;margin-bottom:6px;">${u.id}</div>
+          <div style="font-size:12px;color:var(--flame);font-weight:700;">ELO ${u.elo}</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button onclick="openEditNick()" style="flex:1;padding:10px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:12px;color:#e5e7eb;font-size:12px;font-weight:700;cursor:pointer;" onmouseover="this.style.borderColor='rgba(255,69,0,0.4)'" onmouseout="this.style.borderColor='var(--border)'">✏️ Сменить ник</button>
+        <button onclick="uploadAvatar()" style="flex:1;padding:10px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:12px;color:#e5e7eb;font-size:12px;font-weight:700;cursor:pointer;" onmouseover="this.style.borderColor='rgba(255,69,0,0.4)'" onmouseout="this.style.borderColor='var(--border)'">📷 Сменить фото</button>
+        ${u.avatar?`<button onclick="removeAvatar()" style="padding:10px 14px;background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.2);border-radius:12px;color:#ef4444;font-size:12px;font-weight:700;cursor:pointer;">🗑️</button>`:''}
+      </div>
+    </div>
+
+    <div id="edit-nick-panel" style="display:none;background:rgba(255,69,0,0.07);border:1px solid rgba(255,69,0,0.25);border-radius:14px;padding:16px;margin-bottom:16px;">
+      <div class="section-label" style="margin-bottom:10px;color:var(--flame);">✏️ НОВЫЙ НИК</div>
+      <input id="new-nick-input" class="input-field" placeholder="Введите новый ник..." maxlength="20" style="margin-bottom:10px;" value="${u.name}">
+      <div style="display:flex;gap:8px;">
+        <button onclick="saveNick()" class="btn-flame font-display" style="flex:1;padding:10px;border-radius:10px;font-size:15px;">СОХРАНИТЬ</button>
+        <button onclick="document.getElementById('edit-nick-panel').style.display='none'" class="btn-ghost font-display" style="padding:10px 16px;border-radius:10px;font-size:15px;">ОТМЕНА</button>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px;">
+      <div class="stat-card"><div class="stat-value" style="color:var(--green);">${u.wins}</div><div class="stat-label">WIN</div></div>
+      <div class="stat-card"><div class="stat-value" style="color:#ef4444;">${u.losses}</div><div class="stat-label">LOSE</div></div>
+      <div class="stat-card"><div class="stat-value" style="color:var(--flame);">${u.kd}</div><div class="stat-label">K/D</div></div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="section-label">НАСТРОЙКИ</div>
+      <div style="background:var(--card2);border:1px solid var(--border);border-radius:14px;overflow:hidden;">
+        <div onclick="requestPushPermission()" style="padding:14px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;border-bottom:1px solid var(--border);">
+          <span style="font-size:13px;font-weight:600;">🔔 Уведомления</span><span style="font-size:11px;color:${STATE.pushEnabled?'var(--green)':'#4b5563'};font-weight:700;">${STATE.pushEnabled?'ВКЛ':'ВЫКЛ'}</span>
+        </div>
+        <div onclick="openTab('support')" style="padding:14px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
+          <span style="font-size:13px;font-weight:600;">💬 Поддержка</span><span style="color:#4b5563;">›</span>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function openEditNick(){
+  // Панель рендерится в DOM — показываем её
+  const panel=document.getElementById('edit-nick-panel');
+  if(panel){panel.style.display='block';const inp=document.getElementById('new-nick-input');if(inp){inp.value=STATE.user.name;inp.focus();inp.select();}}
+}
+
+function saveNick(){
+  const inp=document.getElementById('new-nick-input');
+  if(!inp)return;
+  const val=inp.value.trim();
+  if(!val||val.length<2){toast('❌ Ник слишком короткий');return;}
+  if(val.length>20){toast('❌ Ник слишком длинный');return;}
+  STATE.user.name=val;
+  saveData();
+  registerCurrentUser();
+  toast('✅ Ник изменён');
+  renderPage();
+}
+
+// ============================================================
+// STORAGE — ИСПРАВЛЕНО: сохраняем/загружаем корректно
+// ============================================================
+function saveData(){
+  try{
+    const toSave={
+      user: STATE.user,
+      friends: STATE.friends,
+      sentRequests: STATE.sentRequests,
+      declinedRequests: STATE.declinedRequests||[],
+      reports: STATE.reports,
+      supportTickets: STATE.supportTickets,
+      bannedUsers: STATE.bannedUsers,
+      isLogged: STATE.isLogged,
+      pushEnabled: STATE.pushEnabled
+    };
+    localStorage.setItem('flamely_ext', JSON.stringify(toSave));
+  }catch(e){console.warn('saveData error',e);}
+}
+
+function loadData(){
+  try{
+    const raw=localStorage.getItem('flamely_ext');
+    if(!raw)return;
+    const data=JSON.parse(raw);
+    // Мёрджим только известные поля, не перезаписываем весь STATE
+    if(data.user){
+      Object.assign(STATE.user, data.user);
+    }
+    if(data.friends)     STATE.friends=data.friends;
+    if(data.sentRequests) STATE.sentRequests=data.sentRequests;
+    if(data.declinedRequests) STATE.declinedRequests=data.declinedRequests;
+    if(data.reports)     STATE.reports=data.reports;
+    if(data.supportTickets) STATE.supportTickets=data.supportTickets;
+    if(data.bannedUsers) STATE.bannedUsers=data.bannedUsers;
+    if(typeof data.isLogged!=='undefined') STATE.isLogged=data.isLogged;
+    if(typeof data.pushEnabled!=='undefined') STATE.pushEnabled=data.pushEnabled;
+  }catch(e){console.warn('loadData error',e);}
+}
+
+// ============================================================
+// AVATAR — ИСПРАВЛЕНО: не делаем renderPage() до загрузки файла
+// ============================================================
+function uploadAvatar(){
+  const input=document.createElement('input');
+  input.type='file';
+  input.accept='image/*';
+  input.onchange=e=>{
+    const file=e.target.files[0];
+    if(!file)return;
+    if(file.size>5*1024*1024){toast('❌ Файл слишком большой (макс. 5 МБ)');return;}
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      STATE.user.avatar=ev.target.result;
+      saveData();
+      registerCurrentUser();
+      updateNavAvatar();
+      toast('✅ Фото обновлено!');
+      // Если мы на странице профиля — перерисовываем её
+      if(STATE.currentTab==='profile') renderPage();
+    };
+    reader.onerror=()=>toast('❌ Ошибка чтения файла');
+    reader.readAsDataURL(file);
+  };
+  document.body.appendChild(input);
+  input.click();
+  document.body.removeChild(input);
+}
+
+function removeAvatar(){
+  STATE.user.avatar=null;
+  updateNavAvatar();
+  saveData();
+  registerCurrentUser();
+  toast('🗑️ Фото удалено');
+  renderPage();
+}
+
+// ============================================================
+// GENERATE ID
+// ============================================================
+function generateId(){
+  const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let id='#F';
+  for(let i=0;i<4;i++) id+=chars[Math.floor(Math.random()*chars.length)];
+  return id;
+}
+
+// ============================================================
+// ADMIN EXTRA
+// ============================================================
+function adminGiveElo(){adminGiveEloById();}
+function adminChangeNick(){
+  const id=prompt('ID игрока');const val=prompt('Новый ник');
+  if(!id||!val)return;
+  if(id===STATE.user.id){STATE.user.name=val;}else{const u=getUserById(id);if(u)u.name=val;}
+  saveData();toast('Ник изменен');renderPage();
+}
+
+// ============================================================
+// INIT
+// ============================================================
+loadData();
+updateFriendsBadge();
+
+if(!STATE.isLogged){
+  setTimeout(()=>{
+    const name=prompt('Добро пожаловать в FLAMELY!\nВведи свой ник:');
+    if(name&&name.trim()){
+      STATE.user.name=name.trim();
+      STATE.user.id=generateId();
+      STATE.isLogged=true;
+      saveData();
+      registerCurrentUser();
+      toast(`✅ Добро пожаловать, ${STATE.user.name}! Твой ID: ${STATE.user.id}`);
+      renderPage();
+    }
+  },300);
+} else {
+  registerCurrentUser();
+  renderPage();
+}
+
+// Logout double-click на таб профиля
+setTimeout(()=>{
+  const profileBtn=document.querySelector('#tab-profile');
+  if(profileBtn){
+    profileBtn.addEventListener('dblclick',()=>{
+      STATE.isLogged=false;saveData();toast('Вы вышли');renderPage();
+    });
+  }
+},500);
+
+// F2 quick admin
+document.addEventListener('keydown',(e)=>{
+  if(e.key==='F2'){
+    const act=prompt('1=ELO 2=НИК 3=АВАТАР');
+    if(act==='1') adminGiveEloById();
+    if(act==='2') adminChangeNick();
+    if(act==='3') uploadAvatar();
+  }
+});
+
+// Auto save + sync
+setInterval(()=>{
+  saveData();
+  registerCurrentUser();
+  updateFriendsBadge();
+},5000);
+</script>
+</body>
+</html>
